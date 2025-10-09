@@ -19,7 +19,7 @@
       overflow: hidden;
     }
 
-    /* Blur background */
+    /* Background blur */
     .container::before {
       content: "";
       position: absolute;
@@ -33,95 +33,128 @@
       z-index: 0;
     }
 
-    /* Gambar utama */
-    .container img.bg {
+    /* Video utama */
+    .video-wrapper {
       position: relative;
-      width: 100%;
-      height: 100%;
-      object-fit: contain; 
-      object-position: center;
       z-index: 1;
+      width: 90%;
+      max-width: 480px;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
     }
+
+    video, .thumbnail {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .thumbnail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      background: black;
+    }
+
+    /* Overlay di dalam video */
+    .overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      text-align: left;       /* rata kiri */
+      background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+      padding: 20px;
+      border-radius: 10px;
+      box-sizing: border-box;
+      z-index: 3;
+      width: calc(100% - 40px); /* biar tidak kepenuhan */
+    }
+
+    .match-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .subscribe-text {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .btn-watch {
+      display: inline-flex;
+      align-items: center;
+      background: #e50914;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn-watch:hover { background: #b20710; }
+    .btn-watch .icon { margin-right: 8px; font-size: 18px; }
 
     /* Logo kiri atas */
     .logo {
       position: absolute;
       top: 20px;
       left: 20px;
-      z-index: 2;
+      z-index: 4;
     }
     .logo img {
-      height: 50px;
+      height: 45px;
     }
-
-    /* Wrapper untuk teks + tombol */
-    .cta {
-      position: absolute;
-      bottom: 80px; /* jarak dari bawah */
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 2;
-    }
-
-    /* Teks Subscribe to Watch */
-    .subscribe-text {
-      font-size: 26px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-    }
-
-    /* Tombol Watch Live */
-    .btn-watch {
-      display: inline-flex;
-      align-items: center;
-      background: #e50914;
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-size: 20px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    .btn-watch:hover { background: #b20710; }
-    .btn-watch .icon { margin-right: 10px; font-size: 22px; }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Gambar utama -->
-    <img src="https://i.imgur.com/LOXz9vq.png" alt="Game Image" class="bg">
-
-    <!-- Logo kiri atas -->
+    <!-- Logo -->
     <div class="logo">
       <img src="https://i.imgur.com/V0QYwjf.png" alt="Logo">
     </div>
 
-    <!-- Teks + tombol di tengah bawah -->
-    <div class="cta">
-      <div class="subscribe-text">Subscribe to Watch</div>
-      <a href="https://api.powerafftrky.com/t/clk?id=BAtK46CpPpH69DehQ&s1=ghsanetwork&s2=ghsa" 
-         class="btn-watch" 
-         target="_blank" 
-         rel="noopener noreferrer">
-        <span class="icon">▶</span> Watch Live
-      </a>
+    <!-- Video dengan overlay -->
+    <div class="video-wrapper">
+      <!-- Thumbnail -->
+      <img src="https://i.imgur.com/uYpZKqF.jpeg" alt="Thumbnail" class="thumbnail" id="thumbnail">
+
+      <!-- Video -->
+      <video id="liveVideo" muted loop playsinline>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Browser Anda tidak mendukung video.
+      </video>
+
+      <!-- Overlay -->
+      <div class="overlay">
+        <div class="match-title">Team A vs Team B</div>
+        <div class="subscribe-text">Subscribe to Watch</div>
+        <a href="https://api.powerafftrky.com/t/clk?id=BAtK46CpPpH69DehQ&s1=ghsanetwork&s2=ghsa" 
+           class="btn-watch" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          <span class="icon">▶</span> Watch Live
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- Histats.com START -->
-  <script type="text/javascript">var _Hasync= _Hasync|| [];
-  _Hasync.push(['Histats.start', '1,4980999,4,0,0,0,00010000']);
-  _Hasync.push(['Histats.fasi', '1']);
-  _Hasync.push(['Histats.track_hits', '']);
-  (function() {
-  var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-  hs.src = ('//s10.histats.com/js15_as.js');
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-  })();</script>
-  <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?4980999&101" alt="" border="0"></a></noscript>
-  <!-- Histats.com END -->
+  <script>
+    const thumbnail = document.getElementById("thumbnail");
+    const liveVideo = document.getElementById("liveVideo");
+
+    // Tampilkan thumbnail 5 detik, lalu hilang dan play video
+    setTimeout(() => {
+      thumbnail.style.display = "none";
+      liveVideo.play();
+    }, 5000);
+  </script>
 </body>
 </html>
